@@ -7,7 +7,6 @@ export const ContactForm = ({ contacts }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const dispatch = useDispatch();
-
   const stateMap = { name: setName, phone: setPhone };
 
   const onHandleChange = e => {
