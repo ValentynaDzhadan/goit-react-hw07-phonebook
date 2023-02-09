@@ -1,32 +1,23 @@
-import { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { removeContact } from 'redux/contacts/slice.contacts';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from 'redux/contacts/operations.contacts';
 
-export const ContactList = () => {
-  const myContacts = useSelector(state => state.contacts.contactsData);
-  const filter = useSelector(state => state.filter.search);
+export const ContactList = ({ contacts }) => {
   const dispatch = useDispatch();
-
-  const filteredConacts = useMemo(() => {
-    return myContacts.filter(el =>
-      el.name.toLowerCase().includes(filter.toLowerCase().trim())
-    );
-  }, [myContacts, filter]);
 
   return (
     <ul>
-      {filteredConacts.map(el => (
+      {contacts.map(el => (
         <li key={el.id}>
           <span>
-            {el.name} : {el.number}
+            {el.name} : {el.phone}
           </span>
           <button
             onClick={() => {
-              dispatch(removeContact(el.id));
+              dispatch(deleteContact(el.id));
             }}
           >
             Delete
-          </button>
+          </button>{' '}
         </li>
       ))}
     </ul>
